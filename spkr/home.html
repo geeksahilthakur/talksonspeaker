@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to the Home Page!</h1>
+    <button onclick="logout()">Logout</button>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script>
+        // Firebase configuration (replace with your Firebase config)
+        const firebaseConfig = {
+            apiKey: "AIzaSyAf6os8jnKXLsSIPYulri9H0Wehv_QtmZY",
+            authDomain: "heyspeakers.firebaseapp.com",
+            projectId: "heyspeakers",
+            storageBucket: "heyspeakers.appspot.com",
+            messagingSenderId: "100289054827",
+            appId: "1:100289054827:web:483ecbe9353911d94e892e"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // Check if user is authenticated when the home page loads
+        window.onload = function() {
+            auth.onAuthStateChanged(user => {
+                if (!user) {
+                    // User is not logged in, redirect to login page
+                    window.location.href = 'index.html';
+                } else {
+                    // User is logged in, store user info in local storage
+                    localStorage.setItem('user', JSON.stringify(user));
+                }
+            });
+        };
+
+        // Function to log out the user
+        function logout() {
+            auth.signOut().then(() => {
+                localStorage.removeItem('user'); // Clear user data
+                alert("Logged out successfully!");
+                window.location.href = 'index.html';
+            }).catch(error => {
+                alert("Error logging out: " + error.message);
+            });
+        }
+    </script>
+</body>
+</html>
