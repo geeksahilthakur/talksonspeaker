@@ -1,18 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Welcome</title>
+    <style>
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #f5f5f5;
+            border-top: 1px solid transparent;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .selectors {
+            height: 100%;
+            width: 100%;
+        }
+
+        .selectors button {
+            border: 0;
+            border-radius: 0;
+            background-color: #f8f9fa !important;
+            width: 33.33%;
+        }
+
+        .selectors button:focus {
+            border: 0;
+            outline: 0;
+            box-shadow: 0 0 0 0px;
+        }
+
+        .material-icons {
+            font-size: 29px !important;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .user-card {
+            margin-bottom: 20px; /* Add margin between cards */
+        }
+
+        .profile-image {
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .content {
+            padding: 2rem;
+            margin-bottom: 80px; /* Adjust for footer height */
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Welcome to the Home Page!</h1>
-    <button onclick="logout()">Logout</button>
+
+    <!-- Main content -->
+    <div class="content">
+        <h1>Welcome to Your Application!</h1>
+        <p>This is your welcome page content. Add more details here.</p>
+
+        <div class="row" id="userCardsContainer"></div> <!-- Container for user cards -->
+    </div>
+    <!-- End Main content -->
+
+    <!-- Bottom Nav Bar -->
+    <footer class="footer">
+        <div id="buttonGroup" class="btn-group selectors" role="group" aria-label="Basic example">
+            <button id="home" type="button" class="btn btn-secondary">
+                <div class="selector-holder">
+                    <i class="material-icons">home</i>
+                </div>
+            </button>
+            <button id="profile" type="button" class="btn btn-secondary" onclick="location.href='profile.html'">
+                <div class="selector-holder">
+                    <i class="material-icons">account_circle</i>
+                </div>
+            </button>
+            <button id="contact" type="button" class="btn btn-secondary">
+                <div class="selector-holder">
+                    <i class="material-icons">contacts</i>
+                </div>
+            </button>
+        </div>
+    </footer>
+    <!-- End Bottom Nav Bar -->
 
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
     <script>
-        // Firebase configuration (replace with your Firebase config)
+        // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAf6os8jnKXLsSIPYulri9H0Wehv_QtmZY",
             authDomain: "heyspeakers.firebaseapp.com",
@@ -21,34 +108,53 @@
             messagingSenderId: "100289054827",
             appId: "1:100289054827:web:483ecbe9353911d94e892e"
         };
-
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
 
-        // Check if user is authenticated when the home page loads
-        window.onload = function() {
-            auth.onAuthStateChanged(user => {
+        // Load all users
+        function loadUsers() {
+            const db = firebase.database();
+            db.ref('users').once('value').then((snapshot) => {
+                const users = snapshot.val();
+                const userCardsContainer = document.getElementById('userCardsContainer');
+                userCardsContainer.innerHTML = ''; // Clear the container
+
+                for (let uid in users) {
+                    const user = users[uid];
+                    const card = `
+                        <div class="col-md-4 user-card" style="cursor: pointer;" onclick="redirectToUserInfo('${uid}')">
+                            <div class="card">
+                                <img src="${user.profileImage || 'https://via.placeholder.com/150'}" class="card-img-top profile-image" alt="${user.fullName}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${user.fullName}</h5>
+                                    <p class="card-text">Expertise: ${user.expertise}</p>
+                                    <p class="card-text">Interested In: ${user.interestedIn}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    userCardsContainer.innerHTML += card;
+                }
+            });
+        }
+
+        // Redirect to the user info page
+        function redirectToUserInfo(uid) {
+            window.location.href = `displayUserInfo.html?uid=${uid}`;
+        }
+
+        // Check for user session on page load
+        window.onload = function () {
+            loadUsers(); // Load users when the page is loaded
+            // Check if user is already logged in using Firebase Auth state
+            firebase.auth().onAuthStateChanged(function (user) {
                 if (!user) {
-                    // User is not logged in, redirect to login page
+                    console.log("User is not logged in. Redirecting to login page...");
                     window.location.href = 'index.html';
-                } else {
-                    // User is logged in, store user info in local storage
-                    localStorage.setItem('user', JSON.stringify(user));
                 }
             });
         };
-
-        // Function to log out the user
-        function logout() {
-            auth.signOut().then(() => {
-                localStorage.removeItem('user'); // Clear user data
-                alert("Logged out successfully!");
-                window.location.href = 'index.html';
-            }).catch(error => {
-                alert("Error logging out: " + error.message);
-            });
-        }
     </script>
 </body>
+
 </html>
