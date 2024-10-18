@@ -1,7 +1,12 @@
-// Firebase configuration (replace with your Firebase config)
+// Firebase configuration
 const firebaseConfig = {
-
-  };
+    apiKey: "AIzaSyAf6os8jnKXLsSIPYulri9H0Wehv_QtmZY",
+    authDomain: "heyspeakers.firebaseapp.com",
+    projectId: "heyspeakers",
+    storageBucket: "heyspeakers.appspot.com",
+    messagingSenderId: "100289054827",
+    appId: "1:100289054827:web:483ecbe9353911d94e892e"
+};
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -9,12 +14,13 @@ const auth = firebase.auth();
 
 // Check for user session on page load
 window.onload = function() {
-    // Check if user is already logged in
-    const user = localStorage.getItem('user');
-    if (user) {
-        console.log("User is already logged in. Redirecting to home page...");
-        window.location.href = 'home.html';
-    }
+    // Check if user is already logged in using Firebase Auth state
+    auth.onAuthStateChanged(function(user) {
+        if (user) {
+            console.log("User is already logged in. Redirecting to home page...");
+            window.location.href = 'home.html';
+        }
+    });
 };
 
 // Function to handle login form submission
@@ -65,3 +71,12 @@ function signupUser(event) {
         });
 }
 
+// Optional: Function to handle logout
+function logoutUser() {
+    auth.signOut().then(() => {
+        localStorage.removeItem('user'); // Remove user info from local storage
+        window.location.href = 'index.html'; // Redirect to login page
+    }).catch((error) => {
+        console.error("Error during logout: ", error);
+    });
+}
