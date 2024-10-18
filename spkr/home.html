@@ -69,6 +69,19 @@
         <h1>Welcome to Your Application!</h1>
         <p>This is your welcome page content. Add more details here.</p>
 
+        <!-- Search Bar -->
+        <div class="form-group">
+            <input type="text" id="searchBar" class="form-control" placeholder="Search users by username..." onkeyup="searchUsers()">
+        </div>
+
+        <!-- Filter Dropdown -->
+        <div class="form-group">
+            <select id="expertiseFilter" class="form-control" onchange="filterUsers()">
+                <option value="">Select Expertise</option>
+                <!-- Expertise options will be populated here dynamically -->
+            </select>
+        </div>
+
         <div class="row" id="userCardsContainer"></div> <!-- Container for user cards -->
     </div>
     <!-- End Main content -->
@@ -111,30 +124,86 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
 
+        let allUsers = []; // Store all users
+        let allExpertise = new Set(); // Store unique expertise for filtering
+
         // Load all users
         function loadUsers() {
             const db = firebase.database();
             db.ref('users').once('value').then((snapshot) => {
-                const users = snapshot.val();
-                const userCardsContainer = document.getElementById('userCardsContainer');
-                userCardsContainer.innerHTML = ''; // Clear the container
+                allUsers = snapshot.val();
+                displayUsers(allUsers); // Display all users on load
+                populateExpertiseFilter();
+            });
+        }
 
-                for (let uid in users) {
-                    const user = users[uid];
-                    const card = `
-                        <div class="col-md-4 user-card" style="cursor: pointer;" onclick="redirectToUserInfo('${uid}')">
-                            <div class="card">
-                                <img src="${user.profileImage || 'https://via.placeholder.com/150'}" class="card-img-top profile-image" alt="${user.fullName}">
-                                <div class="card-body">
-                                    <h5 class="card-title">${user.fullName}</h5>
-                                    <p class="card-text">Expertise: ${user.expertise}</p>
-                                    <p class="card-text">Interested In: ${user.interestedIn}</p>
-                                </div>
+        // Display users based on the filtered results
+        function displayUsers(users) {
+            const userCardsContainer = document.getElementById('userCardsContainer');
+            userCardsContainer.innerHTML = ''; // Clear the container
+
+            for (let uid in users) {
+                const user = users[uid];
+                const card = `
+                    <div class="col-md-4 user-card" style="cursor: pointer;" onclick="redirectToUserInfo('${uid}')">
+                        <div class="card">
+                            <img src="${user.profileImage || 'https://via.placeholder.com/150'}" class="card-img-top profile-image" alt="${user.fullName}">
+                            <div class="card-body">
+                                <h5 class="card-title">${user.fullName}</h5>
+                                <p class="card-text">Username: ${user.username}</p>
+                                <p class="card-text">Expertise: ${user.expertise}</p>
+                                <p class="card-text">Interested In: ${user.interestedIn}</p>
                             </div>
                         </div>
-                    `;
-                    userCardsContainer.innerHTML += card;
+                    </div>
+                `;
+                userCardsContainer.innerHTML += card;
+            }
+        }
+
+        // Search users by username
+        function searchUsers() {
+            const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+            const filteredUsers = {};
+
+            for (let uid in allUsers) {
+                const user = allUsers[uid];
+                if (user.username.toLowerCase().includes(searchTerm)) {
+                    filteredUsers[uid] = user; // Include user if the username matches
                 }
+            }
+            displayUsers(filteredUsers); // Display the filtered users
+        }
+
+        // Filter users based on expertise
+        function filterUsers() {
+            const selectedExpertise = document.getElementById('expertiseFilter').value;
+            const filteredUsers = {};
+
+            for (let uid in allUsers) {
+                const user = allUsers[uid];
+                if (!selectedExpertise || user.expertise === selectedExpertise) {
+                    filteredUsers[uid] = user; // Include user if expertise matches
+                }
+            }
+            displayUsers(filteredUsers); // Display the filtered users
+        }
+
+        // Populate expertise filter options from all users
+        function populateExpertiseFilter() {
+            const expertiseFilter = document.getElementById('expertiseFilter');
+            expertiseFilter.innerHTML = '<option value="">Select Expertise</option>'; // Clear previous options
+
+            for (let uid in allUsers) {
+                const user = allUsers[uid];
+                allExpertise.add(user.expertise); // Add expertise to the set
+            }
+
+            allExpertise.forEach(expertise => {
+                const option = document.createElement('option');
+                option.value = expertise;
+                option.textContent = expertise;
+                expertiseFilter.appendChild(option); // Append options to the filter
             });
         }
 
@@ -158,3 +227,4 @@
 </body>
 
 </html>
+
