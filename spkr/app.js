@@ -13,9 +13,9 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
 // Check for user session on page load
-window.onload = function() {
+window.onload = function () {
     // Check if user is already logged in using Firebase Auth state
-    auth.onAuthStateChanged(function(user) {
+    auth.onAuthStateChanged(function (user) {
         if (user) {
             console.log("User is already logged in. Redirecting to home page...");
             window.location.href = 'home.html';
@@ -25,7 +25,7 @@ window.onload = function() {
 
 // Function to handle login form submission
 function loginUser(event) {
-    event.preventDefault();  // Prevent the form from submitting
+    event.preventDefault(); // Prevent the form from submitting
 
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
@@ -51,7 +51,7 @@ function loginUser(event) {
 
 // Function to handle sign up form submission
 function signupUser(event) {
-    event.preventDefault();  // Prevent the form from submitting
+    event.preventDefault(); // Prevent the form from submitting
 
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
