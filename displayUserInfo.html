@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>User Info - HeySpeakers</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        .header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .profile-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: block;
+            border: 3px solid #5f6cfa;
+        }
+
+        h1 {
+            color: #5f6cfa;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .btn-primary {
+            background-color: #5f6cfa;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #4a57d1;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .selectors {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .selectors button {
+            flex: 1;
+            border: none;
+            background-color: transparent;
+            color: #5f6cfa;
+            padding: 1rem 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .selectors button:hover {
+            background-color: #f0f2f5;
+        }
+
+        .material-icons {
+            font-size: 24px !important;
+        }
+
+        #otherInfo {
+            margin-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 1.5rem;
+        }
+
+        #otherInfo h3 {
+            color: #5f6cfa;
+            margin-bottom: 1rem;
+        }
+
+        #otherInfo ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #otherInfo li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header with Logo -->
+    <header class="header">
+        <img src="logo.png" alt="HeySpeakers Logo" class="logo">
+    </header>
+
+    <div class="container">
+        <div class="profile-card">
+            <img id="profileImage" class="profile-image" src="" alt="Profile">
+            <h1>User Information</h1>
+            <h2 id="fullName"></h2>
+            <p id="expertise"></p>
+            <p id="interestedIn"></p>
+            <p id="description"></p>
+            <div id="otherInfo"></div>
+        </div>
+        <button class="btn-primary" onclick="window.history.back()">Back</button>
+    </div>
+
+    <!-- Bottom Nav Bar -->
+    <footer class="footer">
+        <div id="buttonGroup" class="selectors" role="group" aria-label="Basic example">
+            <button id="home" type="button" onclick="location.href='home.html'">
+                <i class="material-icons">home</i>
+            </button>
+            <button id="profile" type="button" onclick="location.href='profile.html'">
+                <i class="material-icons">account_circle</i>
+            </button>
+            <button id="contact" type="button">
+                <i class="material-icons">contacts</i>
+            </button>
+        </div>
+    </footer>
+    <!-- End Bottom Nav Bar -->
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAf6os8jnKXLsSIPYulri9H0Wehv_QtmZY",
+            authDomain: "heyspeakers.firebaseapp.com",
+            projectId: "heyspeakers",
+            storageBucket: "heyspeakers.appspot.com",
+            messagingSenderId: "100289054827",
+            appId: "1:100289054827:web:483ecbe9353911d94e892e"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Get user ID from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const uid = urlParams.get('uid');
+
+        // Load user information
+        function loadUserInfo(uid) {
+            const db = firebase.database();
+            db.ref('users/' + uid).once('value').then((snapshot) => {
+                const user = snapshot.val();
+
+                // Fill user data on the page
+                document.getElementById('profileImage').src = user.profileImage || 'https://via.placeholder.com/150';
+                document.getElementById('fullName').textContent = user.fullName;
+                document.getElementById('expertise').textContent = 'Expertise: ' + user.expertise;
+                document.getElementById('interestedIn').textContent = 'Interested In: ' + user.interestedIn;
+                document.getElementById('description').textContent = user.description || 'No description available.';
+
+                // Display all other information
+                let otherInfoHtml = '<h3>Other Information:</h3><ul>';
+                for (const key in user) {
+                    if (key !== 'email' && key !== 'profileImage' && key !== 'fullName' && key !== 'expertise' && key !== 'interestedIn' && key !== 'description') {
+                        otherInfoHtml += `<li><strong>${key}:</strong> ${user[key]}</li>`;
+                    }
+                }
+                otherInfoHtml += '</ul>';
+                document.getElementById('otherInfo').innerHTML = otherInfoHtml;
+            });
+        }
+
+        // Load the user info when the page is loaded
+        window.onload = function () {
+            if (uid) {
+                loadUserInfo(uid);
+            } else {
+                console.error("No user ID found in URL.");
+            }
+        };
+    </script>
+</body>
+
+</html>
