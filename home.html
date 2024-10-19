@@ -5,44 +5,65 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Welcome to HeySpeakers</title>
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
+        :root {
+            --primary-color: #5f6cfa;
+            --secondary-color: #f0f2f5;
+            --text-color: #333;
+            --text-light: #666;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f0f2f5;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
         }
 
         .header {
             background-color: #ffffff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             padding: 1rem 0;
-            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
         .logo {
-            max-width: 200px;
+            max-width: 180px;
             height: auto;
         }
 
         .content {
-            padding: 2rem;
+            padding: 2rem 0;
             margin-bottom: 80px;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         h1 {
-            color: #333;
+            font-size: 2.5rem;
             margin-bottom: 0.5rem;
+            color: var(--primary-color);
         }
 
         p {
-            color: #666;
+            color: var(--text-light);
             margin-bottom: 2rem;
         }
 
@@ -54,8 +75,15 @@
             width: 100%;
             padding: 0.75rem;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 8px;
             font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(95, 108, 250, 0.2);
         }
 
         .row {
@@ -68,10 +96,10 @@
             flex: 0 0 calc(33.333% - 30px);
             margin: 15px;
             background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: var(--transition);
         }
 
         .user-card:hover {
@@ -100,13 +128,13 @@
 
         .card-title {
             font-size: 1.25rem;
-            font-weight: bold;
+            font-weight: 600;
             margin-bottom: 0.5rem;
-            color: #333;
+            color: var(--text-color);
         }
 
         .card-text {
-            color: #666;
+            color: var(--text-light);
             margin-bottom: 0.5rem;
         }
 
@@ -127,17 +155,41 @@
             flex: 1;
             border: none;
             background-color: transparent;
-            color: #5f6cfa;
+            color: var(--primary-color);
             padding: 1rem 0;
-            transition: background-color 0.3s ease;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .selectors button:hover {
-            background-color: #f0f2f5;
+            background-color: rgba(95, 108, 250, 0.1);
         }
 
         .material-icons {
             font-size: 24px !important;
+            margin-bottom: 4px;
+        }
+
+        .talk-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: auto;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .talk-button:hover {
+            background-color: #4a57d1;
+            transform: translateY(-2px);
         }
 
         @media (max-width: 992px) {
@@ -147,72 +199,82 @@
         }
 
         @media (max-width: 768px) {
+            .header{
+                padding: 0.3rem 0;
+
+            }
             .user-card {
                 flex: 0 0 calc(100% - 30px);
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .content {
+                padding: 1rem 0;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Header with Logo -->
     <header class="header">
-        <img src="logo.png" alt="HeySpeakers Logo" class="logo">
+        <div class="container">
+            <center>            <img src="logo.png" alt="HeySpeakers Logo" class="logo">
+            </center>
+        </div>
     </header>
 
-    <!-- Main content -->
     <div class="content">
-        <h1>Find your next speaker</h1>
-        <p>from: Geeksahil</p>
+        <div class="container">
+            <h1>Find your next speaker</h1>
+            <p>Discover talented speakers for your next event</p>
 
-        <!-- Filter Dropdown at the top -->
-        <div class="form-group">
-            <select id="expertiseFilter" class="form-control" onchange="filterUsers()">
-                <option value="">Select Expertise</option>
-                <!-- Expertise options will be populated here dynamically -->
-            </select>
+            <div class="form-group">
+                <select id="expertiseFilter" class="form-control" onchange="filterUsers()">
+                    <option value="">Select Expertise</option>
+                </select>
+            </div>
+
+            <div class="row" id="userCardsContainer"></div>
         </div>
-
-        <div class="row" id="userCardsContainer"></div> <!-- Container for user cards -->
     </div>
-    <!-- End Main content -->
 
-    <!-- Bottom Nav Bar -->
     <footer class="footer">
-        <div id="buttonGroup" class="selectors" role="group" aria-label="Basic example">
+        <div id="buttonGroup" class="selectors" role="group" aria-label="Navigation">
             <button id="home" type="button">
                 <i class="material-icons">home</i>
+                Home
             </button>
             <button id="profile" type="button" onclick="location.href='profile.html'">
                 <i class="material-icons">account_circle</i>
+                Profile
             </button>
             <button id="contact" type="button" onclick="location.href='about.html'">
                 <i class="material-icons">contacts</i>
+                Contact
             </button>
         </div>
     </footer>
-    <!-- End Bottom Nav Bar -->
 
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
     <script>
-        // Firebase configuration
         const firebaseConfig = {
          
         };
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
 
-        let allUsers = []; // Store all users
-        let allExpertise = new Set(); // Store unique expertise for filtering
+        let allUsers = [];
+        let allExpertise = new Set();
 
-        // Load all users
         function loadUsers() {
             const db = firebase.database();
             db.ref('users').once('value').then((snapshot) => {
                 allUsers = snapshot.val();
-                displayUsers(allUsers); // Display all users on load
+                displayUsers(allUsers);
                 populateExpertiseFilter();
             }).catch((error) => {
                 console.error("Error loading users: ", error);
@@ -220,22 +282,22 @@
             });
         }
 
-        // Display users based on the filtered results
         function displayUsers(users) {
             const userCardsContainer = document.getElementById('userCardsContainer');
-            userCardsContainer.innerHTML = ''; // Clear the container
+            userCardsContainer.innerHTML = '';
 
             for (let uid in users) {
                 const user = users[uid];
-                if (user) { // Ensure user is defined
+                if (user) {
                     const card = `
-                        <div class="user-card" onclick="redirectToUserInfo('${uid}')">
+                        <div class="user-card">
                             <div class="card">
                                 <img src="${user.profileImage || 'https://via.placeholder.com/150'}" class="profile-image" alt="${user.fullName}">
                                 <div class="card-body">
                                     <h5 class="card-title">${user.fullName}</h5>
                                     <p class="card-text">Expertise: ${user.expertise}</p>
                                     <p class="card-text">Interested In: ${user.interestedIn}</p>
+                                    <button class="talk-button" onclick="redirectToUserInfo('${uid}')">Talk!</button>
                                 </div>
                             </div>
                         </div>
@@ -245,7 +307,6 @@
             }
         }
 
-        // Filter users based on expertise
         function filterUsers() {
             const selectedExpertise = document.getElementById('expertiseFilter').value;
             const filteredUsers = {};
@@ -253,21 +314,20 @@
             for (let uid in allUsers) {
                 const user = allUsers[uid];
                 if (user && (!selectedExpertise || user.expertise === selectedExpertise)) {
-                    filteredUsers[uid] = user; // Include user if expertise matches
+                    filteredUsers[uid] = user;
                 }
             }
-            displayUsers(filteredUsers); // Display the filtered users
+            displayUsers(filteredUsers);
         }
 
-        // Populate expertise filter options from all users
         function populateExpertiseFilter() {
             const expertiseFilter = document.getElementById('expertiseFilter');
-            expertiseFilter.innerHTML = '<option value="">Select Expertise</option>'; // Clear previous options
+            expertiseFilter.innerHTML = '<option value="">Select Expertise</option>';
 
             for (let uid in allUsers) {
                 const user = allUsers[uid];
                 if (user && user.expertise) {
-                    allExpertise.add(user.expertise); // Add expertise to set
+                    allExpertise.add(user.expertise);
                 }
             }
 
@@ -283,10 +343,8 @@
             window.location.href = `displayUserInfo.html?uid=${uid}`;
         }
 
-        // Check for user session on page load
         window.onload = function () {
-            loadUsers(); // Load users when the page is loaded
-            // Check if user is already logged in using Firebase Auth state
+            loadUsers();
             firebase.auth().onAuthStateChanged(function (user) {
                 if (!user) {
                     console.log("User is not logged in. Redirecting to login page...");
