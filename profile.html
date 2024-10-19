@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - HeySpeakers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        .header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto 5rem;
+            padding: 0 1rem;
+        }
+
+        .profile-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-picture {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-picture img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #5f6cfa;
+        }
+
+        h3 {
+            color: #5f6cfa;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        p {
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #5f6cfa;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #4a57d1;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-3 {
+            margin-top: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .selectors {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .selectors button {
+            flex: 1;
+            border: none;
+            background-color: transparent;
+            color: #5f6cfa;
+            padding: 1rem 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .selectors button:hover {
+            background-color: #f0f2f5;
+        }
+
+        .material-icons {
+            font-size: 24px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <img src="logo.png" alt="HeySpeakers Logo" class="logo">
+    </header>
+
+    <div class="container">
+        <div id="userProfile" class="profile-card">
+            <div class="profile-picture">
+                <img id="profileImage" src="https://via.placeholder.com/150" alt="Profile Picture">
+            </div>
+            <h3 id="fullNameDisplay"></h3>
+            <p id="expertiseDisplay"></p>
+            <p id="experienceDisplay"></p>
+            <p id="aboutDisplay"></p>
+            <p id="socialLinksDisplay"></p>
+            <p id="calendlyDisplay"></p>
+            <p id="preferredContentMethodsDisplay"></p>
+            <p id="interestedInDisplay"></p>
+
+            <div class="text-center mt-3">
+                <button class="btn btn-primary" onclick="showUpdateForm()">Update Profile</button>
+                <button class="btn btn-danger" onclick="logout()">Logout</button>
+            </div>
+        </div>
+
+        <form id="profileForm" class="hidden profile-card">
+            <div class="form-group">
+                <label for="imageUpload">Profile Picture:</label>
+                <input type="file" id="imageUpload" accept="image/*" onchange="uploadImage()">
+            </div>
+            <div class="form-group">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="expertise">Expertise:</label>
+                <input type="text" id="expertise" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="experience">Experience (in years):</label>
+                <input type="number" id="experience" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="about">About:</label>
+                <textarea id="about" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="socialLinks">Social Links:</label>
+                <input type="text" id="socialLinks" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="calendly">Calendly Link:</label>
+                <input type="url" id="calendly" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="preferredContentMethods">Preferred Content Methods:</label>
+                <input type="text" id="preferredContentMethods" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="interestedIn">Interested In:</label>
+                <input type="text" id="interestedIn" class="form-control">
+            </div>
+            <button type="button" class="btn btn-success" onclick="saveProfile()">Save Profile</button>
+        </form>
+    </div>
+
+    <footer class="footer">
+        <div id="buttonGroup" class="selectors" role="group" aria-label="Basic example">
+            <button id="home" type="button" onclick="location.href='home.html'">
+                <i class="material-icons">home</i>
+            </button>
+            <button id="profile" type="button">
+                <i class="material-icons">account_circle</i>
+            </button>
+            <button id="contact" type="button" onclick="location.href='contact.html'">
+                <i class="material-icons">contacts</i>
+            </button>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
+
+    <script>
+        window.onload = function () {
+            const user = localStorage.getItem('user');
+            if (!user) {
+                window.location.href = 'index.html';
+            }
+        };
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAf6os8jnKXLsSIPYulri9H0Wehv_QtmZY",
+            authDomain: "heyspeakers.firebaseapp.com",
+            databaseURL: "https://heyspeakers-default-rtdb.firebaseio.com/",
+            projectId: "heyspeakers",
+            storageBucket: "heyspeakers.appspot.com",
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.database();
+        const storage = firebase.storage();
+        let profileImageUrl = "";
+
+        auth.onAuthStateChanged((user) => {
+            if (!user) {
+                window.location.href = 'index.html';
+            } else {
+                loadProfile();
+            }
+        });
+
+        function uploadImage() {
+            const file = document.getElementById("imageUpload").files[0];
+            const storageRef = storage.ref('profilePictures/' + auth.currentUser.uid + '/' + file.name);
+
+            storageRef.put(file).then(() => {
+                storageRef.getDownloadURL().then((url) => {
+                    profileImageUrl = url;
+                    document.getElementById("profileImage").src = url;
+                });
+            });
+        }
+
+        function showUpdateForm() {
+            document.getElementById("userProfile").classList.add("hidden");
+            document.getElementById("profileForm").classList.remove("hidden");
+        }
+
+        function saveProfile() {
+            const profileData = {
+                fullName: document.getElementById("fullName").value,
+                expertise: document.getElementById("expertise").value,
+                experience: document.getElementById("experience").value,
+                about: document.getElementById("about").value,
+                socialLinks: document.getElementById("socialLinks").value,
+                calendly: document.getElementById("calendly").value,
+                preferredContentMethods: document.getElementById("preferredContentMethods").value,
+                interestedIn: document.getElementById("interestedIn").value,
+                profileImage: profileImageUrl
+            };
+
+            db.ref('users/' + auth.currentUser.uid).set(profileData).then(() => {
+                alert("Profile updated!");
+                window.location.reload();
+            });
+        }
+
+        function loadProfile() {
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    db.ref('users/' + user.uid).once('value').then((snapshot) => {
+                        const data = snapshot.val();
+                        document.getElementById("fullNameDisplay").innerText = data.fullName;
+                        document.getElementById("expertiseDisplay").innerText = "Expertise: " + data.expertise;
+                        document.getElementById("experienceDisplay").innerText = "Experience: " + data.experience + " years";
+                        document.getElementById("aboutDisplay").innerText = data.about;
+                        document.getElementById("socialLinksDisplay").innerText = "Social Links: " + data.socialLinks;
+                        document.getElementById("calendlyDisplay").innerText = "Calendly: " + data.calendly;
+                        document.getElementById("preferredContentMethodsDisplay").innerText = "Preferred Content Methods: " + data.preferredContentMethods;
+                        document.getElementById("interestedInDisplay").innerText = "Interested In: " + data.interestedIn;
+                        document.getElementById("profileImage").src = data.profileImage || "https://via.placeholder.com/150";
+                    });
+                }
+            });
+        }
+
+        function logout() {
+            auth.signOut().then(() => {
+                window.location.href = 'index.html';
+            }).catch((error) => {
+                console.error("Logout error: ", error);
+            });
+        }
+    </script>
+</body>
+
+</html>
