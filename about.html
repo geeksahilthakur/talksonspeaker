@@ -5,45 +5,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - HeySpeakers</title>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
-        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Global Styles */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
             background-color: #f0f2f5;
-            padding-bottom: 60px;
             color: #333;
             line-height: 1.6;
+            padding-bottom: 60px;
         }
 
+        /* Header Styling */
         .header {
             background-color: #ffffff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 1rem 0;
             text-align: center;
-            margin-bottom: 2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
         }
 
         .logo {
-            max-width: 200px;
+            max-width: 150px;
             height: auto;
         }
 
+        /* Container & Content Styling */
         .container {
+            max-width: 800px;
+            margin: 80px auto 60px;
+            padding: 2rem 1rem;
             background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            margin-bottom: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
 
         h1, h2 {
-            color: #5f6cfa;
+            color: #8e55ff;
             margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
         }
 
         .youtube-video-wrapper {
@@ -53,7 +73,7 @@
         .youtube-video-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%;
             overflow: hidden;
             border-radius: 10px;
         }
@@ -65,6 +85,17 @@
             width: 100%;
             height: 100%;
             border: none;
+        }
+
+        .mission-list {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .mission-list li {
+            margin-bottom: 0.5rem;
         }
 
         .team-member {
@@ -86,6 +117,21 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
+        .btn-danger {
+            background-color: #dc3545;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        /* Footer Navigation Styling */
         .footer {
             position: fixed;
             bottom: 0;
@@ -103,9 +149,13 @@
             flex: 1;
             border: none;
             background-color: transparent;
-            color: #5f6cfa;
+            color: #8e55ff;
             padding: 1rem 0;
             transition: background-color 0.3s ease;
+            font-size: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .selectors button:hover {
@@ -113,57 +163,59 @@
         }
 
         .material-icons {
-            font-size: 24px !important;
+            font-size: 28px !important;
+            margin-bottom: 4px;
         }
 
-        .btn-danger {
-            background-color: #dc3545;
-            border-color: #dc3545;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-danger:hover {
-            background-color: #c82333;
-            border-color: #bd2130;
-        }
-
-        .mission-list {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .mission-list li {
-            margin-bottom: 0.5rem;
-        }
-
+        /* Mobile Responsive Adjustments */
         @media (max-width: 768px) {
-            .header{
+            .selectors button {
+                padding: 0.5rem;
+            }
+            .header {
                 padding: 0.3rem 0;
-
             }
+
             .container {
-                padding: 1.5rem;
-            }
-
-            .youtube-video-wrapper {
-                margin-left: -1.5rem;
-                margin-right: -1.5rem;
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-
-            .youtube-video-container {
-                border-radius: 10px;
+                padding: 1.5rem 1rem;
             }
 
             h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
 
             h2 {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
+            }
+
+            .selectors button {
+                font-size: 0.9rem;
+            }
+
+            .material-icons {
+                font-size: 24px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .selectors button {
+                padding: 0.5rem;
+            }
+            .header {
+                padding: 0.3rem 0;
+            }
+
+            .selectors button {
+                padding: 0.5rem 0;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -175,8 +227,8 @@
     </header>
 
     <div class="container">
-        <h1 class="text-center mb-4">About HeySpeakers</h1>
-        <p class="text-center lead">Welcome to HeySpeakers, where we connect passionate speakers with eager audiences!</p>
+        <h1>About HeySpeakers</h1>
+        <p class="lead">Welcome to HeySpeakers, where we connect passionate speakers with eager audiences!</p>
 
         <p>At HeySpeakers, we believe in the power of knowledge sharing and meaningful conversations. Our platform is designed to bridge the gap between experts and learners, creating a vibrant community of growth and inspiration.</p>
 
@@ -186,7 +238,7 @@
             </div>
         </div>
 
-        <h2 class="text-center mt-5 mb-4">Our Mission</h2>
+        <h2>Our Mission</h2>
         <p>HeySpeakers is on a mission to democratize knowledge and provide a platform for voices from all walks of life. We strive to:</p>
         <div class="mission-list">
             <ul>
@@ -197,56 +249,50 @@
             </ul>
         </div>
 
-        <h2 class="text-center mt-5 mb-4">Meet Our Team</h2>
-        <div class="row">
-            <div class="col-md-4 team-member">
+        <h2>Meet Our Team</h2>
+        <div class="team-members">
+            <div class="team-member">
                 <img src="https://via.placeholder.com/150" alt="Team Member 1">
                 <h3>John Doe</h3>
                 <p>Founder & CEO</p>
             </div>
-            <div class="col-md-4 team-member">
+            <div class="team-member">
                 <img src="https://via.placeholder.com/150" alt="Team Member 2">
                 <h3>Jane Smith</h3>
                 <p>Head of Operations</p>
             </div>
-            <div class="col-md-4 team-member">
+            <div class="team-member">
                 <img src="https://via.placeholder.com/150" alt="Team Member 3">
                 <h3>Mike Johnson</h3>
                 <p>Lead Developer</p>
             </div>
         </div>
 
-        <div class="text-center mt-5">
-            <button class="btn btn-danger" onclick="logout()">Logout</button>
+        <div style="text-align: center; margin-top: 2rem;">
+            <button class="btn-danger" onclick="logout()">Logout</button>
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar -->
     <footer class="footer">
-        <div id="buttonGroup" class="btn-group selectors" role="group" aria-label="Basic example">
-            <button id="home" type="button" class="btn btn-secondary" onclick="location.href='home.html'">
-                <div class="selector-holder">
-                    <i class="material-icons">home</i>
-                </div>
+        <div id="buttonGroup" class="selectors" role="group" aria-label="Navigation">
+            <button id="home" type="button" onclick="location.href='home.html'">
+                <i class="material-icons">home</i>
+                <span>Home</span>
             </button>
-            <button id="profile" type="button" class="btn btn-secondary" onclick="location.href='profile.html'">
-                <div class="selector-holder">
-                    <i class="material-icons">account_circle</i>
-                </div>
+            <button id="profile" type="button" onclick="location.href='profile.html'">
+                <i class="material-icons">account_circle</i>
+                <span>Profile</span>
             </button>
-            <button id="contact" type="button" class="btn btn-secondary" onclick="location.href='about.html'">
-                <div class="selector-holder">
-                    <i class="material-icons">contacts</i>
-                </div>
+            <button id="about" type="button" onclick="location.href='about.html'">
+                <i class="material-icons">info</i>
+                <span>About</span>
             </button>
         </div>
     </footer>
 
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
-
     <script>
-        // Redirect to login page if user is not authenticated
         window.onload = function () {
             const user = localStorage.getItem('user');
             if (!user) {

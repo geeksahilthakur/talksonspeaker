@@ -59,7 +59,7 @@
             border-radius: 50%;
             margin: 0 auto 2rem;
             display: block;
-            border: 4px solid #5f6cfa;
+            border: 4px solid #8e55ff;
             box-shadow: 0 4px 8px rgba(95, 108, 250, 0.3);
             transition: transform 0.3s ease-in-out;
         }
@@ -69,7 +69,7 @@
         }
 
         h1 {
-            color: #5f6cfa;
+            color: #8e55ff;
             margin-bottom: 1rem;
             font-size: 2.2rem;
         }
@@ -88,7 +88,7 @@
 
         /* Announcement Section */
         .announcement {
-            background-color: #5f6cfa;
+            background-color: #8e55ff;
             color: white;
             padding: 1rem;
             border-radius: 8px;
@@ -105,7 +105,7 @@
         }
 
         #otherInfo h3 {
-            color: #5f6cfa;
+            color: #8e55ff;
             margin-bottom: 1.2rem;
             font-size: 1.4rem;
         }
@@ -127,7 +127,6 @@
             text-align: center;
         }
 
-        /* Footer Navigation Styling */
         .footer {
             position: fixed;
             bottom: 0;
@@ -145,10 +144,13 @@
             flex: 1;
             border: none;
             background-color: transparent;
-            color: #5f6cfa;
+            color: #8e55ff;
             padding: 1rem 0;
             transition: background-color 0.3s ease;
             font-size: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .selectors button:hover {
@@ -157,8 +159,53 @@
 
         .material-icons {
             font-size: 28px !important;
+            margin-bottom: 4px;
         }
 
+        /* Mobile Responsive Adjustments */
+        @media (max-width: 768px) {
+            .header {
+                padding: 0.3rem 0;
+            }
+
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .selectors button {
+                font-size: 0.9rem;
+            }
+
+            .material-icons {
+                font-size: 24px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 0.3rem 0;
+            }
+
+            .selectors button {
+                padding: 0.5rem 0;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
         /* Mobile Responsive Adjustments */
         @media (max-width: 768px) {
             .header{
@@ -204,6 +251,10 @@
             .header{
                 padding: 0.3rem 0;
 
+            }
+
+            .selectors button {
+                padding: 0.5rem;
             }
             .profile-card {
                 padding: 1.5rem 0.75rem;
@@ -252,15 +303,18 @@
 
     <!-- Bottom Navigation Bar -->
     <footer class="footer">
-        <div id="buttonGroup" class="selectors" role="group" aria-label="Basic example">
+        <div id="buttonGroup" class="selectors" role="group" aria-label="Navigation">
             <button id="home" type="button" onclick="location.href='home.html'">
                 <i class="material-icons">home</i>
+                <span>Home</span>
             </button>
             <button id="profile" type="button" onclick="location.href='profile.html'">
                 <i class="material-icons">account_circle</i>
+                <span>Profile</span>
             </button>
-            <button id="contact" type="button" onclick="location.href='about.html'">
-                <i class="material-icons">contacts</i>
+            <button id="about" type="button" onclick="location.href='about.html'">
+                <i class="material-icons">info</i>
+                <span>About</span>
             </button>
         </div>
     </footer>
