@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>User Info - HeySpeakers</title>
     <style>
+        /* Global Styles */
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
@@ -17,71 +18,116 @@
             color: #333;
         }
 
+        /* Header Styling */
         .header {
             background-color: #ffffff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 1rem 0;
             text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
         }
 
         .logo {
-            max-width: 200px;
+            max-width: 150px;
             height: auto;
         }
 
+        /* Container & Card Styling */
         .container {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 80px auto 60px;
             padding: 2rem 1rem;
         }
 
         .profile-card {
             background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
             margin-bottom: 2rem;
+            text-align: center;
         }
 
         .profile-image {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             object-fit: cover;
             border-radius: 50%;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto 2rem;
             display: block;
-            border: 3px solid #5f6cfa;
+            border: 4px solid #5f6cfa;
+            box-shadow: 0 4px 8px rgba(95, 108, 250, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
         }
 
         h1 {
             color: #5f6cfa;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 2.2rem;
         }
 
         h2 {
             color: #333;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
         }
 
         p {
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             line-height: 1.6;
+            font-size: 1rem;
         }
 
-        .btn-primary {
+        /* Announcement Section */
+        .announcement {
             background-color: #5f6cfa;
-            border: none;
-            padding: 0.75rem 1.5rem;
             color: white;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: bold;
         }
 
-        .btn-primary:hover {
-            background-color: #4a57d1;
+        /* Other Info Section */
+        #otherInfo {
+            margin-top: 2rem;
+            border-top: 2px solid #e0e0e0;
+            padding-top: 1.5rem;
         }
 
+        #otherInfo h3 {
+            color: #5f6cfa;
+            margin-bottom: 1.2rem;
+            font-size: 1.4rem;
+        }
+
+        #otherInfo ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        #otherInfo li {
+            background-color: #f0f2f5;
+            padding: 0.75rem 1.25rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        /* Footer Navigation Styling */
         .footer {
             position: fixed;
             bottom: 0;
@@ -102,6 +148,7 @@
             color: #5f6cfa;
             padding: 1rem 0;
             transition: background-color 0.3s ease;
+            font-size: 1.1rem;
         }
 
         .selectors button:hover {
@@ -109,27 +156,66 @@
         }
 
         .material-icons {
-            font-size: 24px !important;
+            font-size: 28px !important;
         }
 
-        #otherInfo {
-            margin-top: 1.5rem;
-            border-top: 1px solid #e0e0e0;
-            padding-top: 1.5rem;
+        /* Mobile Responsive Adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            .profile-card {
+                padding: 2rem 1rem;
+            }
+
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
+
+            .selectors button {
+                font-size: 1rem;
+            }
+
+            .material-icons {
+                font-size: 24px !important;
+            }
         }
 
-        #otherInfo h3 {
-            color: #5f6cfa;
-            margin-bottom: 1rem;
-        }
+        @media (max-width: 480px) {
+            .profile-card {
+                padding: 1.5rem 0.75rem;
+            }
 
-        #otherInfo ul {
-            list-style-type: none;
-            padding: 0;
-        }
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
 
-        #otherInfo li {
-            margin-bottom: 0.5rem;
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            p {
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
@@ -141,19 +227,21 @@
     </header>
 
     <div class="container">
+        <div class="announcement">
+            🎉 New feature: You can now schedule a call directly with this speaker!
+        </div>
         <div class="profile-card">
             <img id="profileImage" class="profile-image" src="" alt="Profile">
-            <h1>User Information</h1>
+            <h1>Speaker Profile</h1>
             <h2 id="fullName"></h2>
             <p id="expertise"></p>
             <p id="interestedIn"></p>
             <p id="description"></p>
             <div id="otherInfo"></div>
         </div>
-        <button class="btn-primary" onclick="window.history.back()">Back</button>
     </div>
 
-    <!-- Bottom Nav Bar -->
+    <!-- Bottom Navigation Bar -->
     <footer class="footer">
         <div id="buttonGroup" class="selectors" role="group" aria-label="Basic example">
             <button id="home" type="button" onclick="location.href='home.html'">
@@ -167,13 +255,11 @@
             </button>
         </div>
     </footer>
-    <!-- End Bottom Nav Bar -->
 
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
     <script>
-        // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAf6os8jnKXLsSIPYulri9H0Wehv_QtmZY",
             authDomain: "heyspeakers.firebaseapp.com",
@@ -183,30 +269,24 @@
             appId: "1:100289054827:web:483ecbe9353911d94e892e"
         };
 
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
 
-        // Get user ID from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const uid = urlParams.get('uid');
 
-        // Load user information
         function loadUserInfo(uid) {
             const db = firebase.database();
             db.ref('users/' + uid).once('value').then((snapshot) => {
                 const user = snapshot.val();
-
-                // Fill user data on the page
-                document.getElementById('profileImage').src = user.profileImage || 'https://via.placeholder.com/150';
+                document.getElementById('profileImage').src = user.profileImage || 'https://via.placeholder.com/200';
                 document.getElementById('fullName').textContent = user.fullName;
                 document.getElementById('expertise').textContent = 'Expertise: ' + user.expertise;
                 document.getElementById('interestedIn').textContent = 'Interested In: ' + user.interestedIn;
                 document.getElementById('description').textContent = user.description || 'No description available.';
 
-                // Display all other information
-                let otherInfoHtml = '<h3>Other Information:</h3><ul>';
+                let otherInfoHtml = '<h3>Additional Information</h3><ul>';
                 for (const key in user) {
-                    if (key !== 'email' && key !== 'profileImage' && key !== 'fullName' && key !== 'expertise' && key !== 'interestedIn' && key !== 'description') {
+                    if (!['email', 'profileImage', 'fullName', 'expertise', 'interestedIn', 'description'].includes(key)) {
                         otherInfoHtml += `<li><strong>${key}:</strong> ${user[key]}</li>`;
                     }
                 }
@@ -215,7 +295,6 @@
             });
         }
 
-        // Load the user info when the page is loaded
         window.onload = function () {
             if (uid) {
                 loadUserInfo(uid);
