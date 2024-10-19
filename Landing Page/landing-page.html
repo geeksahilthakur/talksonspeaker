@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Speaker - Find and Connect with Speakers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-blue: #090b0d;
+            --light-blue: #7db9f4;
+            --primary-color: #357cbe;
+            --white: #fdfdfd;
+            --black: #5e83a5;
+            --light-gray: #1d1515;
+            --secondary-font-color: #040505;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-gray);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        nav span {
+            font-weight: 500;
+            margin-left: 20px;
+            color: var(--white);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        nav span:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            background-image: url("the_speakers_toolkit.jpg"); /* Placeholder for a background image */
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 52px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        p {
+            color: var(--secondary-font-color);
+            font-size: 18px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button:hover {
+            background-color: var(--dark-blue);
+        }
+
+        .cta-button span {
+            margin-left: 10px;
+        }
+
+        .description {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+
+        h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--dark-blue);
+        }
+
+        .description p {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 18px;
+            color: var(--secondary-font-color);
+            line-height: 1.8;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .description img {
+            width: 100%;
+            height: auto;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+
+        .contact {
+            background-color: var(--dark-blue);
+            color: var(--white); /* Keep this to ensure all text in this section is white */
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: var(--white);
+        }
+
+        
+        .contact p {
+            margin: 10px 0;
+            font-size: 18px;
+            color: var(--white); /* Change this line to set the color of paragraph text to white */
+        }
+        
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            text-align: left;
+            padding: 20px 0;
+            font-size: 14px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer .social-icons {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 10px;
+        }
+
+        footer .social-icons img {
+            height: 30px;
+            margin-right: 15px;
+        }
+
+        /* Adding subtle animations */
+        .hero h1, .hero p {
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="W2UkZMZjnh4rC9wk6e0MfhsRhPhBxRFWSezf9338fdmAVSCdC-removebg-preview.png" alt="Logo"> <!-- Placeholder for logo image -->
+                    Next Speaker
+                </div>
+                <div>
+                    <span>About</span>
+                    <span>Contact Us</span>
+                </div>    
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>🎤 Discover Inspiring Speakers for Your Next Event! 🌟</h1>
+                <div class="cta-buttons">
+                    <a href="#" class="cta-button">Sign Up as Organizer <span>🚀</span></a>
+                    <a href="#" class="cta-button">Sign Up as Speaker <span>🎙️</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="description">
+            <div class="container">
+                <h2>About Next Speaker 🤝</h2>
+                <p>Next Speaker is a revolutionary platform designed to bridge the gap between event organizers and talented speakers. 🌍 Our mission is to simplify the process of finding and booking speakers for events of all sizes, while providing speakers with opportunities to showcase their expertise and grow their careers. 🌟</p>
+                <h3>For Organizers 📝</h3>
+                <p>Discover a diverse pool of speakers, easily browse through profiles, and connect with professionals who align with your event's theme and goals. Our advanced search and matching algorithms ensure you find the perfect fit for your audience.</p>
+                <img src="board-and-committee-role.jpg" alt="Organizers working"> <!-- Placeholder for organizer image -->
+                <h3>For Speakers 🎤</h3>
+                <p>Create a compelling profile, showcase your expertise, and get discovered by event organizers from around the world. Expand your network, gain exposure, and take your speaking career to new heights.</p>
+                <img src="istockphoto-1345084764-612x612.jpg" alt="Speakers at an event"> <!-- Placeholder for speaker image -->
+            </div>
+        </section>
+
+        <section class="contact">
+            <div class="container">
+                <h2>Contact the Makers 💬</h2>
+                <p>Have questions or suggestions? We'd love to hear from you! Reach out and let's talk. 📧</p>
+                <p>Email: contact@nextspeaker.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>Address: 123 Innovation Street, Tech City, TC 12345</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Next Speaker. All rights reserved.</p>
+            <div class="social-icons">
+                <img src="https://via.placeholder.com/30" alt="Facebook"> <!-- Placeholder for social media icon -->
+                <img src="https://via.placeholder.com/30" alt="Twitter"> <!-- Placeholder for social media icon -->
+                <img src="https://via.placeholder.com/30" alt="LinkedIn"> <!-- Placeholder for social media icon -->
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
