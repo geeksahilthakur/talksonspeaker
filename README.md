@@ -1,4 +1,4 @@
-# <div align="center"><img src="/logo.png" alt="SpeakerX Logo" style="width: 200px; height: auto;"></div>
+# <div align="center"><img src="https://github.com/geeksahilthakur/heyspeakers4speakers/blob/main/logo.png?raw=true" alt="SpeakerX Logo" style="width: 200px; height: auto;"></div>
 
 <div align="center">
   <h2>Welcome to SpeakerX!</h2>
