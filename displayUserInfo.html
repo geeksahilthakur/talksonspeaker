@@ -7,18 +7,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>User Info - HeySpeakers</title>
+    <link rel="icon" href="logo.png" type="image/x-icon">
+
+    <title>User Info - TalksOn</title>
     <style>
-        /* Global Styles */
+        :root {
+            --primary-color: #8e55ff;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ffd700;
+            --text-color: #333;
+            --text-light: #666;
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f0f2f5;
-            color: #333;
+            color: var(--text-color);
+            line-height: 1.6;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
         }
 
-        /* Header Styling */
+        h1, h2, h3, p, .info-item {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
+        }
+
         .header {
             background-color: #ffffff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -36,59 +58,112 @@
             height: auto;
         }
 
-        /* Container & Card Styling */
         .container {
             max-width: 800px;
-            margin: 80px auto 60px;
+            margin: 80px auto 80px;
             padding: 2rem 1rem;
         }
 
         .profile-card {
             background-color: #ffffff;
             border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            padding: 3rem;
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
             margin-bottom: 2rem;
-            text-align: center;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
         .profile-image {
-            width: 180px;
-            height: 180px;
+            width: 150px;
+            height: 150px;
             object-fit: cover;
             border-radius: 50%;
-            margin: 0 auto 2rem;
-            display: block;
-            border: 4px solid #8e55ff;
+            margin-right: 2rem;
+            border: 4px solid var(--primary-color);
             box-shadow: 0 4px 8px rgba(95, 108, 250, 0.3);
-            transition: transform 0.3s ease-in-out;
+            transition: var(--transition);
         }
 
         .profile-image:hover {
             transform: scale(1.05);
         }
 
+        .profile-title {
+            flex-grow: 1;
+            min-width: 200px;
+        }
+
         h1 {
-            color: #8e55ff;
-            margin-bottom: 1rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
             font-size: 2.2rem;
+            word-wrap: break-word;
         }
 
         h2 {
-            color: #333;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-
-        p {
+            color: var(--text-color);
             margin-bottom: 1rem;
-            line-height: 1.6;
-            font-size: 1rem;
+            font-size: 1.8rem;
+            word-wrap: break-word;
         }
 
-        /* Announcement Section */
+        .profile-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .profile-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title .material-icons {
+            margin-right: 0.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .info-item {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-value {
+            color: var(--text-color);
+        }
+
         .announcement {
-            background-color: #8e55ff;
+            background-color: var(--primary-color);
             color: white;
             padding: 1rem;
             border-radius: 8px;
@@ -97,26 +172,59 @@
             font-weight: bold;
         }
 
-        /* Other Info Section */
-        #otherInfo {
+        #introVideoDisplay {
             margin-top: 2rem;
-            border-top: 2px solid #e0e0e0;
-            padding-top: 1.5rem;
         }
 
-        #otherInfo h3 {
-            color: #8e55ff;
-            margin-bottom: 1.2rem;
-            font-size: 1.4rem;
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
         }
 
-        #otherInfo ul {
-            list-style-type: none;
-            padding: 0;
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .bottom-nav {
+            background-color: #ffffff;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            gap: 1rem;
+            padding: 15px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .bottom-nav button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 10px;
+        }
+
+        .bottom-nav button:hover {
+            background-color: #7740e0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
 
         #otherInfo li {
@@ -125,6 +233,71 @@
             border-radius: 20px;
             font-size: 0.95rem;
             text-align: center;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
+        }
+
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 0.3rem 0;
+            }
+
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            .profile-card {
+                padding: 1.5rem;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-image {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-card {
+                padding: 1rem;
+            }
+
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            .bottom-nav button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
         }
 
         .footer {
@@ -144,144 +317,27 @@
             flex: 1;
             border: none;
             background-color: transparent;
-            color: #8e55ff;
+            color: var(--primary-color);
             padding: 1rem 0;
-            transition: background-color 0.3s ease;
-            font-size: 1.1rem;
+            transition: var(--transition);
+            font-size: 0.9rem;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         .selectors button:hover {
-            background-color: #f0f2f5;
+            background-color: rgba(95, 108, 250, 0.1);
         }
 
         .material-icons {
-            font-size: 28px !important;
+            font-size: 24px !important;
             margin-bottom: 4px;
-        }
-
-        /* Mobile Responsive Adjustments */
-        @media (max-width: 768px) {
-            .header {
-                padding: 0.3rem 0;
-            }
-
-            .container {
-                padding: 1.5rem 1rem;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            h2 {
-                font-size: 1.4rem;
-            }
-
-            .selectors button {
-                font-size: 0.9rem;
-            }
-
-            .material-icons {
-                font-size: 24px !important;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header {
-                padding: 0.3rem 0;
-            }
-
-            .selectors button {
-                padding: 0.5rem 0;
-            }
-
-            h1 {
-                font-size: 1.6rem;
-            }
-
-            h2 {
-                font-size: 1.2rem;
-            }
-        }
-        /* Mobile Responsive Adjustments */
-        @media (max-width: 768px) {
-            .header{
-                padding: 0.3rem 0;
-
-            }
-
-            .container {
-                padding: 1.5rem 1rem;
-            }
-
-            .profile-card {
-                padding: 2rem 1rem;
-            }
-
-            .profile-image {
-                width: 150px;
-                height: 150px;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            h2 {
-                font-size: 1.4rem;
-            }
-
-            p {
-                font-size: 0.9rem;
-            }
-
-            .selectors button {
-                font-size: 1rem;
-            }
-
-            .material-icons {
-                font-size: 24px !important;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header{
-                padding: 0.3rem 0;
-
-            }
-
-            .selectors button {
-                padding: 0.5rem;
-            }
-            .profile-card {
-                padding: 1.5rem 0.75rem;
-            }
-
-            .profile-image {
-                width: 120px;
-                height: 120px;
-            }
-
-            h1 {
-                font-size: 1.6rem;
-            }
-
-            h2 {
-                font-size: 1.2rem;
-            }
-
-            p {
-                font-size: 0.85rem;
-            }
         }
     </style>
 </head>
 
 <body>
-    <!-- Header with Logo -->
     <header class="header">
         <img src="logo.png" alt="HeySpeakers Logo" class="logo">
     </header>
@@ -291,30 +347,61 @@
             🎉 New feature: You can now schedule a call directly with this speaker!
         </div>
         <div class="profile-card">
-            <img id="profileImage" class="profile-image" src="" alt="Profile">
-            <h1>Speaker Profile</h1>
-            <h2 id="fullName"></h2>
-            <p id="expertise"></p>
-            <p id="interestedIn"></p>
-            <p id="description"></p>
-            <div id="otherInfo"></div>
+            <div class="profile-header">
+                <img id="profileImage" class="profile-image" src="" alt="Profile">
+                <div class="profile-title">
+                    <h1>Speaker Profile</h1>
+                    <h2 id="fullName"></h2>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h3 class="section-title"><i class="material-icons">star</i>Expertise</h3>
+                <p id="expertise"></p>
+            </div>
+
+            <div class="profile-section">
+                <h3 class="section-title"><i class="material-icons">interests</i>Interests</h3>
+                <p id="interestedIn"></p>
+            </div>
+
+            <div class="profile-section">
+                <h3 class="section-title"><i class="material-icons">person</i>About</h3>
+                <p id="description"></p>
+            </div>
+
+            <div id="otherInfo" class="profile-section">
+                <h3 class="section-title"><i class="material-icons">info</i>Additional Information</h3>
+                <div class="info-grid"></div>
+            </div>
+
+            <div id="introVideoDisplay" class="profile-section">
+                <h3 class="section-title"><i class="material-icons">video_library</i>Intro Video</h3>
+                <div class="video-container">
+                    <iframe id="introVideo" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Bottom Navigation Bar -->
+    <!-- <div class="bottom-nav">
+        <button onclick="location.href='index.html'">Home</button>
+        <button onclick="location.href='about.html'">About</button>
+    </div> -->
+
     <footer class="footer">
         <div id="buttonGroup" class="selectors" role="group" aria-label="Navigation">
-            <button id="home" type="button" onclick="location.href='home.html'">
+            <button id="home" type="button" onclick="location.href='profile.html'">
                 <i class="material-icons">home</i>
-                <span>Home</span>
+                Home
             </button>
             <button id="profile" type="button" onclick="location.href='profile.html'">
                 <i class="material-icons">account_circle</i>
-                <span>Profile</span>
+                Profile
             </button>
-            <button id="about" type="button" onclick="location.href='about.html'">
+            <button id="contact" type="button" onclick="location.href='about.html'">
                 <i class="material-icons">info</i>
-                <span>About</span>
+                About
             </button>
         </div>
     </footer>
@@ -343,19 +430,46 @@
                 const user = snapshot.val();
                 document.getElementById('profileImage').src = user.profileImage || 'https://via.placeholder.com/200';
                 document.getElementById('fullName').textContent = user.fullName;
-                document.getElementById('expertise').textContent = 'Expertise: ' + user.expertise;
-                document.getElementById('interestedIn').textContent = 'Interested In: ' + user.interestedIn;
-                // document.getElementById('description').textContent = user.description || 'No description available.';
+                document.getElementById('expertise').textContent = user.expertise;
+                document.getElementById('interestedIn').textContent = user.interestedIn;
+                document.getElementById('description').textContent = user.description || 'No description available.';
 
-                let otherInfoHtml = '<h3>Additional Information</h3><ul>';
+                const otherInfoGrid = document.querySelector('#otherInfo .info-grid');
+                otherInfoGrid.innerHTML = '';
                 for (const key in user) {
-                    if (!['email', 'profileImage', 'fullName', 'expertise', 'interestedIn', 'description'].includes(key)) {
-                        otherInfoHtml += `<li><strong>${key}:</strong> ${user[key]}</li>`;
+                    if (!['email', 'profileImage', 'fullName', 'expertise', 'interestedIn', 'description', 'introVideo'].includes(key)) {
+                        const infoItem = document.createElement('div');
+                        infoItem.className = 'info-item';
+                        infoItem.innerHTML = `
+                            <div class="info-label">${key.charAt(0).toUpperCase() + key.slice(1)}</div>
+                            <div class="info-value">${user[key]}</div>
+                        `;
+                        otherInfoGrid.appendChild(infoItem);
                     }
                 }
-                otherInfoHtml += '</ul>';
-                document.getElementById('otherInfo').innerHTML = otherInfoHtml;
+
+                if (user.introVideo) {
+                    const videoId = getYoutubeVideoId(user.introVideo);
+                    document.getElementById("introVideo").src = `https://www.youtube.com/embed/${videoId}`;
+                    document.getElementById("introVideoDisplay").style.display = "block";
+                } else {
+                    document.getElementById("introVideoDisplay").style.display = "none";
+                }
             });
+        }
+
+        function getYoutubeVideoId(url) {
+            const urlParts = url.split("v=");
+            if (urlParts.length > 1) {
+                return urlParts[1];
+            } else {
+                const urlParts2 = url.split("youtu.be/");
+                if (urlParts2.length > 1) {
+                    return urlParts2[1];
+                } else {
+                    return "";
+                }
+            }
         }
 
         window.onload = function () {

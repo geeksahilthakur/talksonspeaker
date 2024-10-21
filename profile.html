@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile - HeySpeakers</title>
+    <title>User Profile - TalksOn</title>
+    <link rel="icon" href="logo.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
     <style>
         :root {
             --primary-color: #8e55ff;
@@ -34,8 +36,8 @@
 
         .header {
             background-color: #ffffff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
             position: fixed;
             top: 0;
             left: 0;
@@ -44,74 +46,125 @@
         }
 
         .container {
-            max-width: 800px;
-            margin: 80px auto 60px;
-            padding: 2rem 1rem;
+            max-width: 100%;
+            margin: 60px auto 70px;
+            padding: 0.5rem;
         }
 
         .logo {
-            max-width: 150px;
+            max-width: 100px;
             height: auto;
             display: block;
             margin: 0 auto;
-        }
-
-        .announcement {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            text-align: center;
-            font-weight: bold;
         }
 
         .profile-card {
             background-color: #ffffff;
             border-radius: 12px;
             box-shadow: var(--card-shadow);
-            padding: 3rem;
-            margin-bottom: 2rem;
-            text-align: center;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
         }
 
         .profile-picture {
-            width: 180px;
-            height: 180px;
+            width: 80px;
+            height: 80px;
             object-fit: cover;
             border-radius: 50%;
-            margin: 0 auto 2rem;
-            display: block;
-            border: 4px solid var(--primary-color);
+            margin-right: 1rem;
+            border: 2px solid var(--primary-color);
             box-shadow: 0 4px 8px rgba(95, 108, 250, 0.3);
             transition: var(--transition);
         }
 
-        .profile-picture:hover {
-            transform: scale(1.05);
+        .profile-name-title {
+            flex-grow: 1;
+            min-width: 0;
+        }
+
+        h1, h2, h3, p {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
         }
 
         h1 {
             color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 2.2rem;
+            margin-bottom: 0.25rem;
+            font-size: 1.4rem;
         }
 
         h2 {
-            color: var(--text-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 400;
         }
 
-        p {
+        .profile-section {
             margin-bottom: 1rem;
-            color: var(--text-light);
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .profile-section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title .material-icons {
+            margin-right: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .profile-info {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+        }
+
+        .info-item {
+            background-color: #f9f9f9;
+            padding: 0.75rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+            font-size: 0.8rem;
+        }
+
+        .info-value {
+            color: var(--text-color);
+            font-size: 0.8rem;
         }
 
         .btn {
             display: inline-block;
-            padding: 0.75rem 1.5rem;
-            border-radius: 30px;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
             text-decoration: none;
             transition: var(--transition);
             border: none;
@@ -119,8 +172,12 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            font-size: 0.9rem;
-            margin: 0.5rem;
+            font-size: 0.7rem;
+            margin: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
         }
 
         .btn-primary {
@@ -128,19 +185,9 @@
             color: white;
         }
 
-        .btn-primary:hover {
-            background-color: #8e55ff;
-            transform: translateY(-2px);
-        }
-
         .btn-danger {
             background-color: var(--danger-color);
             color: white;
-        }
-
-        .btn-danger:hover {
-            background-color: #c82333;
-            transform: translateY(-2px);
         }
 
         .btn-success {
@@ -148,22 +195,16 @@
             color: white;
         }
 
-        .btn-success:hover {
-            background-color: #218838;
-            transform: translateY(-2px);
-        }
-
         .form-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
+            margin-bottom: 0.75rem;
         }
 
         .form-control {
             width: 100%;
-            padding: 0.75rem;
+            padding: 0.5rem;
             border: 1px solid #ced4da;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.8rem;
             transition: var(--transition);
         }
 
@@ -177,33 +218,16 @@
             display: none;
         }
 
-        #otherInfo {
-            margin-top: 2rem;
-            border-top: 2px solid #e0e0e0;
-            padding-top: 1.5rem;
+        #introVideoDisplay {
+            margin-top: 0.75rem;
         }
 
-        #otherInfo h3 {
-            color: var(--primary-color);
-            margin-bottom: 1.2rem;
-            font-size: 1.4rem;
-        }
-
-        #otherInfo ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        #otherInfo li {
-            background-color: var(--secondary-color);
-            padding: 0.75rem 1.25rem;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            text-align: center;
+        iframe {
+            width: 100%;
+            height: 180px;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
 
         .footer {
@@ -224,7 +248,7 @@
             border: none;
             background-color: transparent;
             color: var(--primary-color);
-            padding: 1rem 0;
+            padding: 0.75rem 0;
             transition: var(--transition);
             font-size: 0.9rem;
             display: flex;
@@ -237,24 +261,50 @@
         }
 
         .material-icons {
-            font-size: 24px !important;
-            margin-bottom: 4px;
+            font-size: 18px !important;
+            margin-bottom: 2px;
         }
 
-        @media (max-width: 768px) {
-            .header{
-                padding: 0.3rem 0;
-
-            }
-            .selectors button {
-                padding: 0.5rem;
-            }
+        @media (min-width: 480px) {
             .container {
-                padding: 1.5rem 1rem;
+                padding: 1rem;
             }
 
             .profile-card {
-                padding: 2rem 1rem;
+                padding: 1.5rem;
+            }
+
+            .profile-picture {
+                width: 100px;
+                height: 100px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            h2 {
+                font-size: 1rem;
+            }
+
+            .btn {
+                font-size: 0.8rem;
+            }
+
+            .info-label, .info-value {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+                margin: 80px auto 80px;
+                padding: 2rem;
+            }
+
+            .profile-card {
+                padding: 2rem;
             }
 
             .profile-picture {
@@ -263,16 +313,41 @@
             }
 
             h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
 
             h2 {
-                font-size: 1.4rem;
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .profile-info {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .btn {
-                font-size: 0.8rem;
-                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+                padding: 0.75rem 1.5rem;
+            }
+
+            iframe {
+                height: 315px;
+            }
+
+            .selectors button {
+                font-size: 0.9rem;
+                padding: 0.75rem 0;
+            }
+
+            .material-icons {
+                font-size: 24px !important;
+            }
+
+            .info-label, .info-value {
+                font-size: 1rem;
             }
         }
     </style>
@@ -284,20 +359,62 @@
     </header>
 
     <div class="container">
-        <!-- <div class="announcement">
-            🎉 New feature: You can now update your profile with more details!
-        </div> -->
         <div id="userProfile" class="profile-card">
-            <img id="profileImage" class="profile-picture" src="https://via.placeholder.com/150" alt="Profile Picture">
-            <h1>Speaker Profile</h1>
-            <h2 id="fullNameDisplay"></h2>
-            <p id="expertiseDisplay"></p>
-            <p id="experienceDisplay"></p>
-            <p id="aboutDisplay"></p>
-            <p id="socialLinksDisplay"></p>
-            <p id="calendlyDisplay"></p>
-            <p id="preferredContentMethodsDisplay"></p>
-            <p id="interestedInDisplay"></p>
+            <div class="profile-header">
+                <img id="profileImage" class="profile-picture" src="https://via.placeholder.com/150" alt="Profile Picture">
+                <div class="profile-name-title">
+                    <h1 id="fullNameDisplay"></h1>
+                    <h2 id="expertiseDisplay"></h2>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h3 class="section-title"><i class="material-icons">person</i>About</h3>
+                <p id="aboutDisplay"></p>
+            </div>
+
+            <div class="profile-section">
+                <h3 class="section-title"><i class="material-icons">work</i>Experience</h3>
+                <div class="profile-info">
+                    <div class="info-item">
+                        <div class="info-label">Years of Experience</div>
+                        <div id="experienceDisplay" class="info-value"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h3 class="section-title"><i class="material-icons">link</i>Connect</h3>
+                <div class="profile-info">
+                    <div class="info-item">
+                        <div class="info-label">Social Links</div>
+                        <div id="socialLinksDisplay" class="info-value"></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Calendly</div>
+                        <div id="calendlyDisplay" class="info-value"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h3 class="section-title"><i class="material-icons">interests</i>Interests</h3>
+                <div class="profile-info">
+                    <div class="info-item">
+                        <div class="info-label">Preferred Content Methods</div>
+                        <div id="preferredContentMethodsDisplay" class="info-value"></div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Interested In</div>
+                        <div id="interestedInDisplay" class="info-value"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h3 class="section-title"><i class="material-icons">video_library</i>Intro Video</h3>
+                <div id="introVideoDisplay"></div>
+            </div>
 
             <div class="text-center mt-3">
                 <button class="btn btn-primary" onclick="showUpdateForm()">Update Profile</button>
@@ -342,6 +459,11 @@
                 <label for="interestedIn">Interested In:</label>
                 <input type="text" id="interestedIn" class="form-control">
             </div>
+            <div class="form-group">
+                <label for="introVideo">Intro Video (YouTube link):</label>
+                <input type="url" id="introVideo" class="form-control">
+            </div>
+            
             <button type="button" class="btn btn-success" onclick="saveProfile()">Save Profile</button>
         </form>
     </div>
@@ -402,7 +524,7 @@
             const storageRef = storage.ref('profilePictures/' + auth.currentUser.uid + '/' + file.name);
 
             storageRef.put(file).then(() => {
-                storageRef.getDownloadURL().then((url) => {
+                storageRef.getDownloadURL().then ((url) => {
                     profileImageUrl = url;
                     document.getElementById("profileImage").src = url;
                 });
@@ -424,6 +546,7 @@
                 calendly: document.getElementById("calendly").value,
                 preferredContentMethods: document.getElementById("preferredContentMethods").value,
                 interestedIn: document.getElementById("interestedIn").value,
+                introVideo: document.getElementById("introVideo").value,
                 profileImage: profileImageUrl
             };
 
@@ -437,16 +560,24 @@
             auth.onAuthStateChanged((user) => {
                 if (user) {
                     db.ref('users/' + user.uid).once('value').then((snapshot) => {
-                        const data =   snapshot.val();
+                        const data = snapshot.val();
                         document.getElementById("fullNameDisplay").innerText = data.fullName;
-                        document.getElementById("expertiseDisplay").innerText = "Expertise: " + data.expertise;
-                        document.getElementById("experienceDisplay").innerText = "Experience: " + data.experience + " years";
+                        document.getElementById("expertiseDisplay").innerText = data.expertise;
+                        document.getElementById("experienceDisplay").innerText = data.experience + " years";
                         document.getElementById("aboutDisplay").innerText = data.about;
-                        document.getElementById("socialLinksDisplay").innerText = "Social Links: " + data.socialLinks;
-                        document.getElementById("calendlyDisplay").innerText = "Calendly: " + data.calendly;
-                        document.getElementById("preferredContentMethodsDisplay").innerText = "Preferred Content Methods: " + data.preferredContentMethods;
-                        document.getElementById("interestedInDisplay").innerText = "Interested In: " + data.interestedIn;
+                        document.getElementById("socialLinksDisplay").innerText = data.socialLinks;
+                        document.getElementById("calendlyDisplay").innerText = data.calendly;
+                        document.getElementById("preferredContentMethodsDisplay").innerText = data.preferredContentMethods;
+                        document.getElementById("interestedInDisplay").innerText = data.interestedIn;
                         document.getElementById("profileImage").src = data.profileImage || "https://via.placeholder.com/150";
+
+                        if (data.introVideo) {
+                            const videoId = getYoutubeVideoId(data.introVideo);
+                            const videoEmbed = `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                            document.getElementById("introVideoDisplay").innerHTML = videoEmbed;
+                        } else {
+                            document.getElementById("introVideoDisplay").innerHTML = "";
+                        }
 
                         // Populate form fields
                         document.getElementById("fullName").value = data.fullName;
@@ -457,6 +588,7 @@
                         document.getElementById("calendly").value = data.calendly;
                         document.getElementById("preferredContentMethods").value = data.preferredContentMethods;
                         document.getElementById("interestedIn").value = data.interestedIn;
+                        document.getElementById("introVideo").value = data.introVideo;
                     });
                 }
             });
@@ -468,6 +600,20 @@
             }).catch((error) => {
                 console.error("Logout error: ", error);
             });
+        }
+
+        function getYoutubeVideoId(url) {
+            const urlParts = url.split("v=");
+            if (urlParts.length > 1) {
+                return urlParts[1];
+            } else {
+                const urlParts2 = url.split("youtu.be/");
+                if (urlParts2.length > 1) {
+                    return urlParts2[1];
+                } else {
+                    return "";
+                }
+            }
         }
     </script>
 </body>
